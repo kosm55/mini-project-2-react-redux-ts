@@ -1,0 +1,9 @@
+.Genres{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: #aba5a5;
+}
+.Genres a{
+    text-decoration: none;
+}
