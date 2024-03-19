@@ -1,18 +1,20 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, isFulfilled} from "@reduxjs/toolkit";
 import {AxiosError} from "axios";
 
-import {IMovie} from "../../interfaces";
+import {IMovie, IMovieInfo} from "../../interfaces";
 import {moviesService} from "../../services";
 
 
 interface IState {
     movies: IMovie[],
-    movie: IMovie | null
+    movie: IMovieInfo,
+    searchTitle: string
 }
 
 const initialState: IState = {
     movies: [],
-    movie: null
+    movie: null,
+    searchTitle: ''
 };
 
 const getAll= createAsyncThunk<IMovie[], {with_genres: string}>(
@@ -27,7 +29,7 @@ const getAll= createAsyncThunk<IMovie[], {with_genres: string}>(
         }
     }
 )
-const getById= createAsyncThunk<IMovie, number>(
+const getById= createAsyncThunk<IMovieInfo, number>(
     'movieSlice/getById',
     async (movie_id, {rejectWithValue})=>{
         try {
@@ -39,12 +41,24 @@ const getById= createAsyncThunk<IMovie, number>(
         }
     }
 )
+const getAllWithTitle= createAsyncThunk<IMovie[], string>(
+    'movieSlice/getAllWithTitle',
+    async (title, {rejectWithValue})=>{
+        try {
+            const {data} = await moviesService.getAllWithTitle(title)
+            return data.results
+        }catch (e) {
+            const err= e as AxiosError
+            return rejectWithValue(err.response.data)
+        }
+    }
+)
 const movieSlice= createSlice({
     name: 'movieSlice',
     initialState,
     reducers: {
-        setMovie: (state, action)=>{
-            state.movie=action.payload
+        updateSearchTitle: (state, action) => {
+            state.searchTitle = action.payload;
         }
     },
     extraReducers: builder =>
@@ -54,8 +68,11 @@ const movieSlice= createSlice({
             })
             .addCase(getById.fulfilled, (state, action)=>{
                 state.movie=action.payload
-
             })
+            .addCase(getAllWithTitle.fulfilled, (state, action)=>{
+                state.movies=action.payload
+            })
+
 })
 
 const {reducer: movieReducer, actions} = movieSlice;
@@ -63,7 +80,8 @@ const {reducer: movieReducer, actions} = movieSlice;
 const movieAction={
     ...actions,
     getAll,
-    getById
+    getById,
+    getAllWithTitle
 }
 
 export {

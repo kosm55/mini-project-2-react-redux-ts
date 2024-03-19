@@ -1,12 +1,13 @@
 import {Outlet} from "react-router-dom";
 
-import {Genres, Header} from "../components";
+import {Genres, Header, SearchMovieForm} from "../components";
 
 const MainLayout = () => {
     return (
         <div>
             <Header/>
             <Genres/>
+            <SearchMovieForm/>
             <Outlet/>
         </div>
     );

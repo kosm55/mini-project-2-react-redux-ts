@@ -1,18 +1,21 @@
 import {FC, PropsWithChildren} from 'react';
-import {IMovie} from "../../../interfaces";
+
+import {IMovieInfo} from "../../../interfaces";
+import {GenreBadge} from "../../GenresContainer";
 
 interface IProps extends PropsWithChildren {
-    movie: IMovie
+    movie: IMovieInfo
 }
 
 const MovieInfo: FC<IProps> = ({movie}) => {
-    const {id,title,overview, genre_ids} = movie;
+    const {id,title,overview, genres} = movie;
+
     return (
         <div>
             <div>id: {id}</div>
             <div>title: {title}</div>
             <div>overview: {overview}</div>
-            <div>: {genre_ids}</div>
+            <div>{genres.map(genre=> <GenreBadge key={genre.id} genre={genre}/>)}</div>
         </div>
     );
 };

@@ -1,18 +1,25 @@
-import {useAppDispatch, useAppSelector} from "../../../hooks/reduxHooks";
-import {MoviesListCard} from "../MoviesListCardContainer";
 import {useEffect} from "react";
-import {movieAction} from "../../../store";
 import {useSearchParams} from "react-router-dom";
 
+import {useAppDispatch, useAppSelector} from "../../../hooks/reduxHooks";
+import {MoviesListCard} from "../MoviesListCardContainer";
+import {movieAction} from "../../../store";
+
+
 const MoviesList = () => {
-    const {movies} = useAppSelector(state => state.movies);
+    const {movies, searchTitle } = useAppSelector(state => state.movies);
     const dispatch = useAppDispatch();
-    const [query, setQuery] = useSearchParams();
+    const [query] = useSearchParams();
     const with_genres=query.get('with_genres')
 
     useEffect(() => {
-        dispatch(movieAction.getAll({with_genres}))
-    }, [with_genres]);
+        if (searchTitle){
+            dispatch(movieAction.getAllWithTitle(searchTitle))
+        }else{
+            dispatch(movieAction.getAll({with_genres}))
+        }
+    }, [with_genres, searchTitle,dispatch]);
+
 
     return (
         <div>
