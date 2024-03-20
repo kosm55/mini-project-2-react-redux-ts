@@ -8,20 +8,22 @@ import {moviesService} from "../../services";
 interface IState {
     movies: IMovie[],
     movie: IMovieInfo,
-    searchTitle: string
+    searchTitle: string,
+    page: string
 }
 
 const initialState: IState = {
     movies: [],
     movie: null,
-    searchTitle: ''
+    searchTitle: '',
+    page: '1'
 };
 
-const getAll= createAsyncThunk<IMovie[], {with_genres: string}>(
+const getAll= createAsyncThunk<IMovie[], {with_genres: string, page: string}>(
     'movieSlice/getAll',
-    async ({ with_genres}, {rejectWithValue})=>{
+    async ({page,  with_genres}, {rejectWithValue})=>{
         try {
-            const {data}= await moviesService.getAll(with_genres)
+            const {data}= await moviesService.getAll(page, with_genres)
             return data.results
         }catch (e) {
             const err= e as AxiosError
@@ -41,12 +43,13 @@ const getById= createAsyncThunk<IMovieInfo, number>(
         }
     }
 )
-const getAllWithTitle= createAsyncThunk<IMovie[], string>(
+const getAllWithTitle= createAsyncThunk<IMovie[], { searchTitle: string, page: string }>(
     'movieSlice/getAllWithTitle',
-    async (title, {rejectWithValue})=>{
+    async ({ page,searchTitle}, {rejectWithValue})=>{
         try {
-            const {data} = await moviesService.getAllWithTitle(title)
+            const {data} = await moviesService.getAllWithTitle(page, searchTitle)
             return data.results
+
         }catch (e) {
             const err= e as AxiosError
             return rejectWithValue(err.response.data)
@@ -59,6 +62,9 @@ const movieSlice= createSlice({
     reducers: {
         updateSearchTitle: (state, action) => {
             state.searchTitle = action.payload;
+        },
+        setCurrentPage: (state,action)=>{
+            state.page= action.payload
         }
     },
     extraReducers: builder =>

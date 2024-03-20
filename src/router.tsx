@@ -1,7 +1,7 @@
 import {createBrowserRouter, Navigate} from "react-router-dom";
 
 import {MainLayout} from "./layouts";
-import {MovieInfoPage, MoviesPage} from "./pages";
+import {MovieInfoPage, MoviesPage, PosterPage} from "./pages";
 
 const router=createBrowserRouter([
     {
@@ -14,6 +14,9 @@ const router=createBrowserRouter([
             },
             {
                 path: 'movie/info/:id', element: <MovieInfoPage/>
+            },
+            {
+                path: 'https://image.tmdb.org/t/p/w500', element: <PosterPage/>
             }
         ]
     }

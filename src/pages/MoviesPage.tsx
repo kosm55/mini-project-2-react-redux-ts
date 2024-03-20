@@ -1,8 +1,11 @@
-import {MoviesList} from "../components";
+import {Genres, MoviePagination, MoviesList, SearchMovieForm} from "../components";
 
 const MoviesPage = () => {
     return (
         <div>
+            <Genres/>
+            <SearchMovieForm/>
+            <MoviePagination/>
             <MoviesList/>
         </div>
     );

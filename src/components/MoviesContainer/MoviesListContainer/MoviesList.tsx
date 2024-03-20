@@ -7,18 +7,18 @@ import {movieAction} from "../../../store";
 
 
 const MoviesList = () => {
-    const {movies, searchTitle } = useAppSelector(state => state.movies);
+    const {movies, searchTitle, page } = useAppSelector(state => state.movies);
     const dispatch = useAppDispatch();
     const [query] = useSearchParams();
     const with_genres=query.get('with_genres')
 
     useEffect(() => {
         if (searchTitle){
-            dispatch(movieAction.getAllWithTitle(searchTitle))
+            dispatch(movieAction.getAllWithTitle({page, searchTitle}))
         }else{
-            dispatch(movieAction.getAll({with_genres}))
+            dispatch(movieAction.getAll({page, with_genres}))
         }
-    }, [with_genres, searchTitle,dispatch]);
+    }, [with_genres, searchTitle,dispatch, page]);
 
 
     return (

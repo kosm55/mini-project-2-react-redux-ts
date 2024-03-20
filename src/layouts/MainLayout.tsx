@@ -6,8 +6,7 @@ const MainLayout = () => {
     return (
         <div>
             <Header/>
-            <Genres/>
-            <SearchMovieForm/>
+
             <Outlet/>
         </div>
     );
