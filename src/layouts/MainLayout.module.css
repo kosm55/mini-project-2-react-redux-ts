@@ -1,0 +1,14 @@
+.mainLight{
+    background-color: #bdcbcb;
+    font-family:  sans-serif;
+    letter-spacing: 1px;
+}
+button{
+    font-family:  sans-serif;
+    letter-spacing: 1px;
+}
+.mainDark{
+    background-color: black;
+    font-family:  sans-serif;
+    letter-spacing: 1px;
+}

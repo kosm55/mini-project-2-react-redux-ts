@@ -1,7 +1,7 @@
 import {SubmitHandler, useForm} from "react-hook-form";
 import {useNavigate} from "react-router-dom";
 
-import {useAppDispatch, useAppSelector} from "../../../hooks/reduxHooks";
+import {useAppDispatch} from "../../../hooks/reduxHooks";
 import {movieAction} from "../../../store";
 
 
@@ -9,7 +9,7 @@ import {movieAction} from "../../../store";
 const SearchMovieForm = () => {
     const {register, handleSubmit, reset} = useForm();
     const dispatch = useAppDispatch();
-    const {page} = useAppSelector(state => state.movies);
+    // const {page} = useAppSelector(state => state.movies);
 
     const navigate = useNavigate();
 

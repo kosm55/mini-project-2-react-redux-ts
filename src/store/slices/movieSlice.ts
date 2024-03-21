@@ -1,4 +1,4 @@
-import {createAsyncThunk, createSlice, isFulfilled} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, isFulfilled, isRejected} from "@reduxjs/toolkit";
 import {AxiosError} from "axios";
 
 import {IMovie, IMovieInfo} from "../../interfaces";
@@ -9,22 +9,26 @@ interface IState {
     movies: IMovie[],
     movie: IMovieInfo,
     searchTitle: string,
-    page: string
+    page: string,
+    total_pages: number,
+    error: {status_message: string}
 }
 
 const initialState: IState = {
     movies: [],
     movie: null,
     searchTitle: '',
-    page: '1'
+    page: '1',
+    total_pages: null,
+    error: {status_message: null}
 };
 
-const getAll= createAsyncThunk<IMovie[], {with_genres: string, page: string}>(
+const getAll= createAsyncThunk<{results: IMovie[], page: string, total_pages: number}, {with_genres: string, page: string}>(
     'movieSlice/getAll',
     async ({page,  with_genres}, {rejectWithValue})=>{
         try {
             const {data}= await moviesService.getAll(page, with_genres)
-            return data.results
+            return data
         }catch (e) {
             const err= e as AxiosError
             return rejectWithValue(err.response.data)
@@ -43,12 +47,12 @@ const getById= createAsyncThunk<IMovieInfo, number>(
         }
     }
 )
-const getAllWithTitle= createAsyncThunk<IMovie[], { searchTitle: string, page: string }>(
+const getAllWithTitle= createAsyncThunk<{results: IMovie[], page: string, total_pages: number}, { searchTitle: string, page: string }>(
     'movieSlice/getAllWithTitle',
     async ({ page,searchTitle}, {rejectWithValue})=>{
         try {
             const {data} = await moviesService.getAllWithTitle(page, searchTitle)
-            return data.results
+            return data
 
         }catch (e) {
             const err= e as AxiosError
@@ -69,16 +73,20 @@ const movieSlice= createSlice({
     },
     extraReducers: builder =>
         builder
-            .addCase(getAll.fulfilled, (state, action)=>{
-                state.movies=action.payload
-            })
-            .addCase(getById.fulfilled, (state, action)=>{
+            .addCase(getById.fulfilled, (state,action)=>{
                 state.movie=action.payload
+                state.error=null
             })
-            .addCase(getAllWithTitle.fulfilled, (state, action)=>{
-                state.movies=action.payload
+            .addMatcher(isFulfilled(getAll, getAllWithTitle), (state, action)=>{
+                const {results, page, total_pages}= action.payload
+                state.page=page
+                state.total_pages=total_pages
+                state.movies=results
+                state.error=null
             })
-
+            .addMatcher(isRejected(), (state, action)=>{
+                state.error = action.payload as { status_message: string }
+            })
 })
 
 const {reducer: movieReducer, actions} = movieSlice;

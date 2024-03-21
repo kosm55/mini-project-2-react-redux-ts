@@ -16,7 +16,7 @@ const router=createBrowserRouter([
                 path: 'movie/info/:id', element: <MovieInfoPage/>
             },
             {
-                path: 'https://image.tmdb.org/t/p/w500', element: <PosterPage/>
+                path: 'https://image.tmdb.org/t/p/w500/:poster_path', element: <PosterPage/>
             }
         ]
     }

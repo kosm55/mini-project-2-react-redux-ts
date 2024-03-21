@@ -1,0 +1,21 @@
+.MoviesListCard{
+    width: 250px;
+    height: 380px;
+    text-align: center;
+    padding: 10px 0 10px 0;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    background: teal;
+}
+.MoviesListCard img{
+    width: 200px;
+    height: 300px;
+}
+.MoviesListCard h3{
+    padding: 0;
+    margin: 0;
+}
+.MoviesListCard:hover{
+    box-shadow: 0px 3px 18px 10px rgba(10,47,71,0.63);
+}

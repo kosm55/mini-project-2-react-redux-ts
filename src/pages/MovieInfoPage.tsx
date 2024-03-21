@@ -16,6 +16,7 @@ const MovieInfoPage = () => {
 
     return (
         <div>
+
             {movie && <MovieInfo movie={movie}/>}
         </div>
     );

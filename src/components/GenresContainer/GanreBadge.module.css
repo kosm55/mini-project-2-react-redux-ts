@@ -12,6 +12,7 @@ a{
 }
 .Badge:hover{
     color: #bd1818;
+    box-shadow: 0px 3px 15px 5px rgba(10,47,71,0.63);
 }
 .GenreBadge{
     margin-top: 10px;

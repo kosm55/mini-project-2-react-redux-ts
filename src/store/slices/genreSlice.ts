@@ -5,25 +5,26 @@ import {AxiosError} from "axios";
 import {genreService} from "../../services";
 
 interface IState {
-    genres: IGenre[]
+    genres: IGenre[],
+    error: { status_message: string }
 }
 
 const initialState: IState = {
-    genres: []
+    genres: [],
+    error: {status_message: null}
 };
 
-const getAll= createAsyncThunk<IGenre[], void>(
+const getAll = createAsyncThunk<IGenre[], void>(
     'genreSlice/getAll',
-    async (_, {rejectWithValue})=>{
+    async (_, {rejectWithValue}) => {
         try {
             const {data} = await genreService.getAll();
             return data.genres
-        }catch (e) {
-            const err= e as AxiosError
-            return rejectWithValue(err. response.data)
+        } catch (e) {
+            const err = e as AxiosError
+            return rejectWithValue(err.response.data)
         }
     }
-
 )
 const genreSlice = createSlice({
     name: 'genreSlice',
@@ -31,8 +32,12 @@ const genreSlice = createSlice({
     reducers: {},
     extraReducers: builder =>
         builder
-            .addCase(getAll.fulfilled, (state, action)=>{
-                state.genres=action.payload
+            .addCase(getAll.fulfilled, (state, action) => {
+                state.genres = action.payload
+                state.error = null
+            })
+            .addCase(getAll.rejected, (state, action) => {
+                state.error = action.payload as { status_message: string }
             })
 })
 

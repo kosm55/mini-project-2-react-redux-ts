@@ -18,7 +18,6 @@ const urls={
     search: {
         base: search
     }
-
 }
 
 export {

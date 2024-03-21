@@ -1,5 +1,6 @@
 import {useEffect} from "react";
 import {useSearchParams} from "react-router-dom";
+import css from "./MovieList.module.css"
 
 import {useAppDispatch, useAppSelector} from "../../../hooks/reduxHooks";
 import {MoviesListCard} from "../MoviesListCardContainer";
@@ -22,7 +23,7 @@ const MoviesList = () => {
 
 
     return (
-        <div>
+        <div className={css.MoviesListMain}>
             {movies.map(movie=> <MoviesListCard key={movie.id} movie={movie}/>)}
         </div>
     );

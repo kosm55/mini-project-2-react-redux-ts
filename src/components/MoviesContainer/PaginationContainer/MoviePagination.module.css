@@ -1,0 +1,16 @@
+.MoviePagination{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #468f52;
+
+}
+.page{
+    background-color: teal;
+    padding: 10px;
+    border-radius: 50px;
+    margin: 0 50px;
+}
+.MoviePagination button{
+    margin: 0;
+}
