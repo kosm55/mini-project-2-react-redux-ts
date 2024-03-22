@@ -11,7 +11,7 @@ const Genres = () => {
 
     useEffect(() => {
         dispatch(genreAction.getAll())
-    }, []);
+    }, [dispatch]);
     return (
         <div className={css.Genres}>
             {genres.map(genre=> <GenreBadge key={genre.id} genre={genre}/>)}

@@ -1,5 +1,5 @@
 .mainLight{
-    background-color: #bdcbcb;
+    background-color: #c4d5d5;
     font-family:  sans-serif;
     letter-spacing: 1px;
 }
@@ -11,4 +11,11 @@ button{
     background-color: black;
     font-family:  sans-serif;
     letter-spacing: 1px;
+}
+.loading{
+    height: 5px;
+    background-color: teal;
+}
+.error{
+    background-color: #bd1818;
 }

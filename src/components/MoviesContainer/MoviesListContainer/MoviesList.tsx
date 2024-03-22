@@ -1,14 +1,14 @@
 import {useEffect} from "react";
 import {useSearchParams} from "react-router-dom";
-import css from "./MovieList.module.css"
 
 import {useAppDispatch, useAppSelector} from "../../../hooks/reduxHooks";
 import {MoviesListCard} from "../MoviesListCardContainer";
 import {movieAction} from "../../../store";
+import css from "./MovieList.module.css"
 
 
 const MoviesList = () => {
-    const {movies, searchTitle, page } = useAppSelector(state => state.movies);
+    const {movies, searchTitle,page } = useAppSelector(state => state.movies);
     const dispatch = useAppDispatch();
     const [query] = useSearchParams();
     const with_genres=query.get('with_genres')

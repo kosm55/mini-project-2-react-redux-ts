@@ -1,0 +1,6 @@
+.PosterPage{
+    display: flex;
+}
+.PosterPage img{
+    padding-left: 23%;
+}

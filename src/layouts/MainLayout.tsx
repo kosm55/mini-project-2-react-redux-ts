@@ -1,7 +1,7 @@
 import {Outlet} from "react-router-dom";
 import css from './MainLayout.module.css'
 
-import {Header} from "../components";
+import {Header, Loading} from "../components";
 import {useAppSelector} from "../hooks/reduxHooks";
 
 const MainLayout = () => {
@@ -12,9 +12,14 @@ const MainLayout = () => {
     return (
         <div className={darkMode? css.mainDark : css.mainLight}>
             <Header/>
-            {/*{isLoading&& <h6>Loading...</h6>}*/}
-            {/*{error && <h1>ERROR GENRE : {error.status_message}</h1>}*/}
-            {/*{errorMovie && <h1>ERROR MOVIE: {errorMovie.status_message}</h1>}*/}
+            <div className={css.loading}>
+                {isLoading&& <Loading/>}
+            </div>
+            {/*<div className={css.error}>*/}
+            {/*    {error && <h5>ERROR GENRE : {error.status_message}</h5>}*/}
+            {/*    {errorMovie && <h5>ERROR MOVIE: {errorMovie.status_message}</h5>}*/}
+            {/*</div>*/}
+
             <Outlet/>
 
         </div>

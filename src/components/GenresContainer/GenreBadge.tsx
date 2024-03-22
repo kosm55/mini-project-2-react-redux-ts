@@ -1,8 +1,7 @@
 import {FC, PropsWithChildren} from 'react';
 import {NavLink} from "react-router-dom";
-// import Badge from '@mui/material/Badge';
-import css from "./GanreBadge.module.css"
 
+import css from "./GanreBadge.module.css"
 import {IGenre} from "../../interfaces";
 import {movieAction} from "../../store";
 import {useAppDispatch} from "../../hooks/reduxHooks";
@@ -18,6 +17,7 @@ const GenreBadge: FC<IProps> = ({genre}) => {
 
     const clearSearch= ():void =>{
         dispatch(movieAction.setCurrentPage('1'))
+        dispatch(movieAction.updateSearchTitle(''))
     }
     return (
         <div className={css.GenreBadge}>

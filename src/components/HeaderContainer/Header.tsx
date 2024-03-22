@@ -13,7 +13,7 @@ const Header = () => {
 
     const clearSearch= ():void =>{
         dispatch(movieAction.updateSearchTitle(''))
-        dispatch(movieAction.setCurrentPage('1'))
+        dispatch(movieAction.setCurrentPage(1))
     }
 
     return (
