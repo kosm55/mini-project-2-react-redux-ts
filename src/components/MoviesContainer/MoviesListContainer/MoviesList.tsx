@@ -8,10 +8,11 @@ import css from "./MovieList.module.css"
 
 
 const MoviesList = () => {
-    const {movies, searchTitle,page } = useAppSelector(state => state.movies);
+    const {movies, searchTitle } = useAppSelector(state => state.movies);
     const dispatch = useAppDispatch();
     const [query] = useSearchParams();
     const with_genres=query.get('with_genres')
+    const page=query.get("page")
 
     useEffect(() => {
         if (searchTitle){

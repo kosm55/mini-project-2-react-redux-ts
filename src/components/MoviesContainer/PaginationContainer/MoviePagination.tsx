@@ -1,8 +1,8 @@
 import {useSearchParams} from "react-router-dom";
-import css from "./MoviePagination.module.css"
 
 import {useAppDispatch, useAppSelector} from "../../../hooks/reduxHooks";
 import {movieAction} from "../../../store";
+import css from "./MoviePagination.module.css"
 
 const MoviePagination = () => {
     const {  page} = useAppSelector(state => state.movies);
@@ -11,7 +11,7 @@ const MoviePagination = () => {
 
     const prevPage = () => {
         setQuery(prevState => {
-            const nextPage = (+prevState.get('page') - 1).toString()
+            const nextPage = (+page - 1).toString()
             dispatch(movieAction.setCurrentPage(nextPage))
             prevState.set('page', nextPage)
             return prevState
@@ -19,7 +19,7 @@ const MoviePagination = () => {
     }
     const nextPage = () => {
         setQuery(prevState => {
-            const nextPage = (+prevState.get('page') + 1).toString()
+            const nextPage = (+page + 1).toString()
             dispatch(movieAction.setCurrentPage(nextPage))
             prevState.set('page', nextPage)
             return prevState

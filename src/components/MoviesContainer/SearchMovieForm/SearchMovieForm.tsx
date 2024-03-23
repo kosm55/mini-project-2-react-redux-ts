@@ -14,7 +14,6 @@ const SearchMovieForm = () => {
 
     const search:SubmitHandler<any> =(query)=>{
         dispatch(movieAction.updateSearchTitle(query.title))
-        dispatch(movieAction.setCurrentPage('1'))
         navigate(`/movie?query=${query.title}&page=1`)
         reset()
     }
