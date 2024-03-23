@@ -12,8 +12,7 @@ const urls={
 
     },
     genres: {
-        base: genres,
-        byId: (genre_id: number): string => `/genre/${genre_id}`
+        base: genres
     },
     search: {
         base: search

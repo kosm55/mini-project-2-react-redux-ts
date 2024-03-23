@@ -24,7 +24,6 @@ const MoviePagination = () => {
             prevState.set('page', nextPage)
             return prevState
         })
-
     }
 
 
@@ -38,3 +37,4 @@ const MoviePagination = () => {
 };
 
 export {MoviePagination};
+

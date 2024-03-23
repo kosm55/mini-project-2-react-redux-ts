@@ -2,7 +2,6 @@ import {useNavigate, useParams} from "react-router-dom";
 
 import css from "./PosterPage.module.css"
 
-
 const PosterPage = () => {
     const navigate = useNavigate();
     const {poster_path} = useParams();

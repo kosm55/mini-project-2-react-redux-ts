@@ -29,7 +29,7 @@ const MovieInfo: FC<IProps> = ({movie}) => {
         <div className={css.main} style={{backgroundImage: `url('https://image.tmdb.org/t/p/w500/${backdrop_path}')`}}>
             <button onClick={() => navigate(-1)}>back</button>
             <div className={css.MovieInfoMain}>
-                <div onClick={() => navigate(`/image.tmdb.org/t/p/w500${poster_path}`, {state: movie})}>
+                <div onClick={() => navigate(`/image.tmdb.org/t/p/w500${poster_path}`)}>
                     <img src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt={title}/>
                 </div>
                 <div className={css.GenreBadge}>{genres.map(genre=> <GenreBadge key={genre.id} genre={genre}/>)}</div>

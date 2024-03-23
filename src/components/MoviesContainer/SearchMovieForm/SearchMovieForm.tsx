@@ -10,8 +10,6 @@ import css from "./SearchMovieForm.module.css"
 const SearchMovieForm = () => {
     const {register, handleSubmit, reset} = useForm();
     const dispatch = useAppDispatch();
-    // const {page} = useAppSelector(state => state.movies);
-
     const navigate = useNavigate();
 
     const search:SubmitHandler<any> =(query)=>{

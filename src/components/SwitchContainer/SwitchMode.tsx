@@ -1,7 +1,8 @@
 import { styled } from '@mui/material/styles';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch, { SwitchProps } from '@mui/material/Switch';
+import Switch from '@mui/material/Switch';
+
 import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
 import {switchModeActions} from "../../store/slices/switchModeSlice";
 
@@ -72,7 +73,6 @@ const SwitchMode = () => {
                 />
                 }
                 label=""
-
             />
         </FormGroup>
     );

@@ -20,7 +20,7 @@ const initialState: IState = {
     searchTitle: '',
     page: '1',
     total_pages: null,
-    error: {status_message: null}
+    error: null
 };
 
 const getAll= createAsyncThunk<{results: IMovie[], page: string, total_pages: number}, {with_genres: string, page: string}>(

@@ -1,7 +1,7 @@
 import {FC, PropsWithChildren} from 'react';
 import {useNavigate} from "react-router-dom";
-import css from "./MoviesListCard.module.css"
 
+import css from "./MoviesListCard.module.css"
 import {IGenre, IMovie} from "../../../interfaces";
 import {StarsRating} from "../../StarsRating";
 import {useAppSelector} from "../../../hooks/reduxHooks";
@@ -12,12 +12,13 @@ interface IProps extends PropsWithChildren {
 }
 
 const MoviesListCard: FC<IProps> = ({movie}) => {
-    const navigate = useNavigate();
     const {id, title,vote_average, poster_path,release_date, genre_ids} = movie;
+    const navigate = useNavigate();
     const {genres} = useAppSelector(state => state.genre);
 
-    const showGenreOfMovie=(genres: IGenre[], genre_ids: number[])=>{
-        return genre_ids.map((id_genre: number) => {
+
+    const showGenreOfMovie= (genres: IGenre[], genre_ids: number[])=>{
+         return genres && genre_ids.map((id_genre: number) => {
             const genre = genres.find(item => item.id === id_genre)
             return <GenreBadge key={id_genre} genre={genre}/>
         })
