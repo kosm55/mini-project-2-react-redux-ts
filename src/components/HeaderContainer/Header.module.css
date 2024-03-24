@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: teal;
+    background: linear-gradient(#082a2a, teal);
     height: 80px;
 }
 .Header a{
@@ -13,10 +13,10 @@
     margin: 0 5px;
 }
 .Header a[class='active'] {
-    color: #ab1212;
+    color: #591313;
 }
 .Header a:hover{
-    color: #1d47a4;
+    color: #535969;
 }
 .login{
     display: flex;
@@ -35,7 +35,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: teal;
+    background: linear-gradient(#082a2a, teal);
     height: 80px;
 }
 .HeaderDark a{

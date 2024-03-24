@@ -4,7 +4,7 @@
     align-items: center;
 }
 .page{
-    background-color: teal;
+    background: linear-gradient(#082a2a, teal);
     padding: 10px;
     border-radius: 50px;
     margin: 0 50px;

@@ -39,7 +39,7 @@ button{
     color: snow;
     font-size: 15px;
     cursor: pointer;
-    background-color: teal;
+    background: linear-gradient(#082a2a, teal);
     border: none;
     border-radius: 3px;
 }
@@ -48,4 +48,7 @@ button:hover{
 }
 .GenreBadge{
     margin-left: -20px;
+}
+.Trailer{
+    padding: 5%;
 }

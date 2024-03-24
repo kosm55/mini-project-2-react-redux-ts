@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice, isFulfilled, isRejected} from "@reduxjs/toolkit";
 import {AxiosError} from "axios";
 
-import {IMovie, IMovieInfo} from "../../interfaces";
+import {IMovie, IMovieInfo, IVideo} from "../../interfaces";
 import {moviesService} from "../../services";
 
 
@@ -11,7 +11,8 @@ interface IState {
     searchTitle: string,
     page: string,
     total_pages: number,
-    error: {status_message: string}
+    error: {status_message: string},
+    video: IVideo[]
 }
 
 const initialState: IState = {
@@ -20,7 +21,8 @@ const initialState: IState = {
     searchTitle: '',
     page: '1',
     total_pages: null,
-    error: null
+    error: null,
+    video: []
 };
 
 const getAll= createAsyncThunk<{results: IMovie[], page: string, total_pages: number}, {with_genres: string, page: string}>(
@@ -60,6 +62,18 @@ const getAllWithTitle= createAsyncThunk<{results: IMovie[], page: string, total_
         }
     }
 )
+const getVideoOfMovie= createAsyncThunk<IVideo[], number>(
+    'getVideoOfMovie/movieSlice',
+    async (movie_id, {rejectWithValue})=>{
+        try {
+            const {data} = await moviesService.getVideo(movie_id);
+            return data.results
+        }catch (e) {
+            const err=e as AxiosError
+            return rejectWithValue(err.response.data)
+        }
+    }
+)
 const movieSlice= createSlice({
     name: 'movieSlice',
     initialState,
@@ -75,6 +89,10 @@ const movieSlice= createSlice({
         builder
             .addCase(getById.fulfilled, (state,action)=>{
                 state.movie=action.payload
+                state.error=null
+            })
+            .addCase(getVideoOfMovie.fulfilled, (state, action)=>{
+                state.video=action.payload
                 state.error=null
             })
             .addMatcher(isFulfilled(getAll, getAllWithTitle), (state, action)=>{
@@ -95,7 +113,8 @@ const movieAction={
     ...actions,
     getAll,
     getById,
-    getAllWithTitle
+    getAllWithTitle,
+    getVideoOfMovie
 }
 
 export {

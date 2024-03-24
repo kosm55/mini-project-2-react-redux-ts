@@ -6,7 +6,7 @@
     margin: 10px;
     cursor: pointer;
     border-radius: 5px;
-    background: teal;
+    background: linear-gradient(#082a2a, teal);
 }
 .MoviesListCard img{
     width: 200px;

@@ -32,3 +32,12 @@ export interface IMovieInfo{
     vote_count: number,
     title: string
 }
+
+export interface IVideo{
+    name: string,
+    key: string,
+    site: string,
+    size: number,
+    type: string,
+    id: string
+}
